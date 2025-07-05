@@ -1,7 +1,24 @@
+# Python bytecode
 __pycache__/
-*.pyc
+*.py[cod]
+*.so
+
+# Environment files
 .env
-*.log
-.vscode/
 .venv/
+env/
+ENV/
+.venv.bak/
+
+# Log files
+*.log
+
+# macOS
 .DS_Store
+
+# VSCode settings
+.vscode/
+
+# Render, Heroku, or local deploy artifacts
+*.sqlite3
+instance/
