@@ -1,6 +1,2 @@
-import os
-from dotenv import load_dotenv
-load_dotenv()
-
-BOT_TOKEN = os.getenv("BOT_TOKEN")
-CHAT_ID = int(os.getenv("CHAT_ID"))
+BOT_TOKEN = "YOUR_BOT_TOKEN_HERE"
+CHAT_ID = 123456789  # beddel chat id-ga saxda ah
