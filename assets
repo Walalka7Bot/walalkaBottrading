@@ -3,3 +3,15 @@ assets/
 ├── sl_sound.mp3
 ├── entry_sound.mp3
 └── chart_sample.jpg
+from PIL import Image
+import os
+
+# Open and convert the image to RGB (in case it's RGBA or has transparency)
+image_path = "/mnt/data/A_digital_photograph_displays_four_files_within_a_.png"
+img = Image.open(image_path).convert("RGB")
+
+# Save it as a proper JPG file for GitHub compatibility
+jpg_path = "/mnt/data/logo.jpg"
+img.save(jpg_path, "JPEG")
+
+jpg_path
