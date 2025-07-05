@@ -1,11 +1,7 @@
-.env
 __pycache__/
 *.pyc
-*.pyo
-*.pyd
-*.db
-*.sqlite3
+.env
 *.log
-*.pdf
-assets/*.wav
-assets/*.mp3
+.vscode/
+.venv/
+.DS_Store
