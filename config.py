@@ -1,2 +1,7 @@
-BOT_TOKEN = "7646107517:AAG19U9yHKE1St1bTC86AbFweslqZOack6c"  # ama .env ka akhri
-CHAT_ID = "6846894934"  # beddelkan midka saxda ah (Telegram user ID ama group/channel ID)
+import os
+from dotenv import load_dotenv
+
+load_dotenv()
+
+BOT_TOKEN = os.getenv("BOT_TOKEN")
+CHAT_ID = os.getenv("CHAT_ID")
