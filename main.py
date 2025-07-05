@@ -1,6 +1,4 @@
-from telegram.ext import (
-    ApplicationBuilder, CommandHandler, ContextTypes
-)
+from telegram.ext import ApplicationBuilder, CommandHandler, ContextTypes
 from telegram import Update, ReplyKeyboardMarkup, Bot
 from config import BOT_TOKEN, CHAT_ID
 
@@ -11,17 +9,20 @@ import csv
 from datetime import datetime
 from fpdf import FPDF
 
-# --- STATIC SETTINGS ---
+# --- SETTINGS ---
 BALANCE = 5000
 MAX_DRAWDOWN = 250
 VALID_SYMBOLS = ["BTC", "ETH", "SOL", "XRP", "GOLD", "SILVER", "EURUSD", "GBPUSD", "USDJPY", "AUDUSD", "USDCAD"]
-VIP_USERS = [CHAT_ID]  # Isticmaal chat ID sax ah
+VIP_USERS = [int(CHAT_ID)]
 
-# --- TELEGRAM BOT ---
+# --- INIT BOT ---
+if not BOT_TOKEN:
+    raise ValueError("❌ BOT_TOKEN is missing from .env file")
+
 app = ApplicationBuilder().token(BOT_TOKEN).build()
 bot = Bot(token=BOT_TOKEN)
 
-# --- UI: /start ---
+# --- MENU UI ---
 menu_buttons = [
     ['📈 Get Signal', '📄 My Journal'],
     ['💰 Upgrade to VIP', '🔕 Mute Voice Alerts'],
@@ -30,6 +31,7 @@ menu_buttons = [
     ['🥇 Metals: GOLD / SILVER']
 ]
 
+# --- /start ---
 async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "👋 *Salaam!* \nKu soo dhowow *ICT Forex Signals Bot* 📈\n\n"
@@ -68,7 +70,7 @@ async def sendsignal(update: Update, context: ContextTypes.DEFAULT_TYPE):
     except Exception as e:
         await update.message.reply_text(f"⚠️ Error: {str(e)}")
 
-# --- /tp /sl /entry ---
+# --- AUDIO ALERTS ---
 TP_SOUND = "assets/tp_sound.mp3"
 SL_SOUND = "assets/sl_sound.mp3"
 EN_SOUND = "assets/entry_sound.mp3"
@@ -125,7 +127,7 @@ trades = [
     {"symbol": "EURUSD", "EN": "1.0845", "TP": "1.0880", "SL": "1.0825", "result": "WIN", "pnl": "+35 pips"},
     {"symbol": "GOLD", "EN": "2310.0", "TP": "2330.0", "SL": "2290.0", "result": "LOSS", "pnl": "-20 pips"},
     {"symbol": "BTC", "EN": "65000", "TP": "67000", "SL": "64000", "result": "WIN", "pnl": "+2000"},
-    {"symbol": "ETH", "EN": "3000", "TP": "3200", "SL": "2900", "result": "WIN", "pnl": "+20"}  # 💵 lacag 20
+    {"symbol": "ETH", "EN": "3000", "TP": "3200", "SL": "2900", "result": "WIN", "pnl": "+20"}
 ]
 
 def generate_pdf():
@@ -218,6 +220,7 @@ app.add_handler(CommandHandler("result", result))
 app.add_handler(CommandHandler("vip", vip_command))
 app.add_handler(CommandHandler("market", market))
 
-# --- Start Polling ---
-print("✅ ALL MODULES READY — Bot is Live")
-app.run_polling()
+# --- Run Bot ---
+if __name__ == "__main__":
+    print("✅ ALL MODULES READY — Bot is Live")
+    app.run_polling()
