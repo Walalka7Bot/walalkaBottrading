@@ -1,12 +1,12 @@
 services:
   - type: web
-    name: ict-tradebot
+    name: walalkaBot
     env: python
+    plan: free
     buildCommand: pip install -r requirements.txt
     startCommand: python main.py
     envVars:
       - key: BOT_TOKEN
-        sync: false
+        value: 7646107517:AAG19U9yHKE1St1bTC86AbFweslqZOack6c
       - key: CHAT_ID
-        sync: false
-    autoDeploy: true
+        value: 6846894934
